@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { Card } from 'semantic-ui-react'
+import UserCard from './UserCard'
 
 const USER_API = 'http://localhost:3001/users'
 
@@ -19,12 +21,12 @@ export default class ExplorePage extends Component {
 
   render() {
 
-    let userPs = this.state.users.map(user=> <p key={user.id}> {user.display_name} </p>)
+    let userCards = this.state.users.map(user=> <UserCard key={user.id} user={user} />)
 
     return (
-      <div className="ExplorePage">
-        {userPs}
-      </div>
+      <Card.Group>
+        {userCards}
+      </Card.Group>
     )
   }
 
