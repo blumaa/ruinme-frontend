@@ -3,6 +3,7 @@ import { Route, Switch} from 'react-router-dom'
 import NavBar from './components/Navbar'
 import style from './index.css'
 import ExplorePage from './components/ExplorePage'
+import ProfilePage from './components/ProfilePage'
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" component={NavBar} />
       <Switch>
         <Route path="/explore" component={ExplorePage} />
+        <Route path="/Profile" component={ProfilePage} />
       </Switch>
     </div>
   );

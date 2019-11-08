@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card, Icon} from 'semantic-ui-react'
 
-const UserCard = ( {user} ) => (
-  <Card>
+const UserCard = ( {user, userShow} ) => (
+  <Card onClick={() => {userShow(user)}}>
     <Card.Content>
       <Card.Header>{user.display_name}</Card.Header>
       <Card.Meta>
