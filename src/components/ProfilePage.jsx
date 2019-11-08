@@ -11,11 +11,6 @@ class ProfilePage extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  componentDidMount = () => {
-    let id = this.props.match.params.user_id
-    this.setState({id})
-  }
-
   render() {
     const { activeItem } = this.state
     const { display_name, age, gender, bio} = this.props.user
@@ -37,8 +32,6 @@ class ProfilePage extends Component {
           <button className="ui button"> Back</button>
         </NavLink>
         </Container>
-
-
       </div>
 
     )
@@ -46,11 +39,10 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps)
+  console.log(state)
   let id = ownProps.match.params.user_id
-  console.log(id)
   return {
-    user: state.users.find((user) => {
+    user: state.users.users.data.find(user => {
       return user.id === parseInt(id)
     })
   }

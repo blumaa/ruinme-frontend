@@ -4,13 +4,16 @@ import UserCard from './UserCard'
 import ProfilePage from './ProfilePage'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { fetchUsers } from '../store/actions/fetchUsers'
 
-
-const USER_API = 'http://localhost:3001/users'
 
 class ExplorePage extends Component {
   state = {
     userShow: {}
+  }
+
+  componentDidMount = () => {
+    this.props.getUsers()
   }
 
   userShow = (user) => {
@@ -19,15 +22,14 @@ class ExplorePage extends Component {
   }
 
   handleBackButton = (event) => {
-    console.log(event)
     this.setState({userShow: []})
   }
 
   render() {
-
     const { users } = this.props
+    console.log('kjasehgkjhaeskgesa', users)
 
-    let userCards = users.map(user=> <UserCard key={user.id} user={user} userShow={this.userShow}/>)
+    let userCards = users.data ? users.data.map(user=> <UserCard key={user.id} user={user} userShow={this.userShow}/>) : "no users"
 
     return (
       <div>
@@ -42,8 +44,12 @@ class ExplorePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users
+    users: state.users.users
   }
 }
 
-export default connect(mapStateToProps)(ExplorePage)
+const mapDispatchToProps = (dispatch) => {
+  return { getUsers: () => dispatch(fetchUsers()) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExplorePage)

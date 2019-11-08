@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import App from './App'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
-import rootReducer from './reducers/rootReducer'
+import rootReducer from './store/reducers/rootReducer'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createLogger } from 'redux-logger'
+
+const logger = createLogger({collapsed:true});
 
 
-const store = createStore(rootReducer);
+const middleware = composeWithDevTools(applyMiddleware(thunk, logger))
+
+const store = createStore(rootReducer, middleware);
+
 
 ReactDOM.render(<Provider store={store}><Router>
   <App /> </Router> </Provider>, document.getElementById('root'));
