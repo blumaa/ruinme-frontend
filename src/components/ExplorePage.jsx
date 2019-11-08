@@ -1,24 +1,16 @@
 import React, {Component} from 'react';
 import { Card } from 'semantic-ui-react'
 import UserCard from './UserCard'
-import ProfielPage from './ProfilePage'
+import ProfilePage from './ProfilePage'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+
 
 const USER_API = 'http://localhost:3001/users'
 
-export default class ExplorePage extends Component {
-
+class ExplorePage extends Component {
   state = {
-    users: [],
-    userShow: []
-  }
-
-  async componentDidMount() {
-    let resp = await fetch(USER_API)
-    let userData = await resp.json()
-    console.log(userData)
-    this.setState({
-      users: [...userData.data]
-    }, ()=>console.log(this.state))
+    userShow: {}
   }
 
   userShow = (user) => {
@@ -33,13 +25,25 @@ export default class ExplorePage extends Component {
 
   render() {
 
-    let userCards = this.state.users.map(user=> <UserCard key={user.id} user={user} userShow={this.userShow}/>)
+    const { users } = this.props
+
+    let userCards = users.map(user=> <UserCard key={user.id} user={user} userShow={this.userShow}/>)
 
     return (
       <div>
-        {this.state.userShow.length > 0 ? <ProfielPage user={this.state.userShow[0]} handleBackButton={this.handleBackButton} /> : <Card.Group> {userCards} </Card.Group> }
+        {this.state.userShow.id ?
+            <ProfilePage user={this.state.userShow} />
+          : <Card.Group> {userCards} </Card.Group> }
       </div>
     )
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
+  }
+}
+
+export default connect(mapStateToProps)(ExplorePage)

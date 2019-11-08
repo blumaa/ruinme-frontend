@@ -12,7 +12,8 @@ function App() {
       <Route path="/" component={NavBar} />
       <Switch>
         <Route path="/explore" component={ExplorePage} />
-        <Route path="/Profile" component={ProfilePage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/:user_id" component={ProfilePage} />
       </Switch>
     </div>
   );
