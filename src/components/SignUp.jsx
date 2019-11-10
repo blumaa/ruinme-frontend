@@ -26,7 +26,15 @@ class SignUp extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.addUser(this.state)
-    this.setState({})
+    this.setState({
+      email: "",
+      displayName: "",
+      age: "",
+      gender: "",
+      lookingFor: "0101",
+      zipCode: "",
+      bio: ""
+    })
   }
 
   render() {
