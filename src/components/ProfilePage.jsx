@@ -16,7 +16,7 @@ class ProfilePage extends Component {
     const { display_name, age, gender, bio } = this.props.user;
     const { handleBackButton } = this.props;
     return (
-      <div>
+      <div className="ui item">
         <Container text>
           <Header as="h2">{display_name}</Header>
 
