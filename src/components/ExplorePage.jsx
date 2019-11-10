@@ -1,55 +1,62 @@
-import React, {Component} from 'react';
-import { Card } from 'semantic-ui-react'
-import UserCard from './UserCard'
-import ProfilePage from './ProfilePage'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { fetchUsers } from '../store/actions/fetchUsers'
-
+import React, { Component } from "react";
+import { Card } from "semantic-ui-react";
+import UserCard from "./UserCard";
+import ProfilePage from "./ProfilePage";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchUsers } from "../store/actions/fetchUsers";
 
 class ExplorePage extends Component {
   state = {
     userShow: {}
-  }
+  };
 
   componentDidMount = () => {
-    this.props.getUsers()
-  }
+    this.props.getUsers();
+  };
 
-  userShow = (user) => {
-    console.log(user)
-    this.setState({userShow: [user]})
-  }
+  userShow = user => {
+    console.log(user);
+    this.setState({ userShow: [user] });
+  };
 
-  handleBackButton = (event) => {
-    this.setState({userShow: []})
-  }
+  handleBackButton = event => {
+    this.setState({ userShow: [] });
+  };
 
   render() {
-    const { users } = this.props
-    console.log('kjasehgkjhaeskgesa', users)
+    const { users } = this.props;
+    console.log("kjasehgkjhaeskgesa", users);
 
-    let userCards = users.data ? users.data.map(user=> <UserCard key={user.id} user={user} userShow={this.userShow}/>) : "no users"
+    let userCards = users.data
+      ? users.data.map(user => (
+          <UserCard key={user.id} user={user} userShow={this.userShow} />
+        ))
+      : "no users";
 
     return (
-      <div>
-        {this.state.userShow.id ?
-            <ProfilePage user={this.state.userShow} />
-          : <Card.Group> {userCards} </Card.Group> }
+      <div className="ui main text container">
+        {this.state.userShow.id ? (
+          <ProfilePage user={this.state.userShow} />
+        ) : (
+          <Card.Group> {userCards} </Card.Group>
+        )}
       </div>
-    )
+    );
   }
-
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     users: state.users.users
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return { getUsers: () => dispatch(fetchUsers()) }
-}
+const mapDispatchToProps = dispatch => {
+  return { getUsers: () => dispatch(fetchUsers()) };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExplorePage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExplorePage);
