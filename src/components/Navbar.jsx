@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Fragment } from "react";
 const NavBar = props => {
   return (
     <>
@@ -10,7 +9,7 @@ const NavBar = props => {
               Profile
             </NavLink>
           ) : (
-            <NavLink to="/signup" className="blue item">
+            <NavLink to="/sign_up" className="blue item">
               Sign Up
             </NavLink>
           )}

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Card } from "semantic-ui-react";
-import UserCard from "./UserCard";
+import React, {Component} from 'react';
+import { Card, Header, Icon } from 'semantic-ui-react'
+import UserCard from './UserCard'
 import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -20,28 +20,52 @@ class ExplorePage extends Component {
     this.setState({ userShow: [user] });
   };
 
-  handleBackButton = event => {
-    this.setState({ userShow: [] });
-  };
+
+ /* state = {
+    users: []
+  }
+
+  async componentDidMount() {
+    let resp = await fetch(USER_API, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    let userData = await resp.json()
+
+    if (userData.data) {
+    console.log(userData)
+    this.setState({
+      users: [...userData.data]
+    }, ()=>console.log(this.state)) }
+    else {
+
+    }
+  } */
+  /* let userCards = this.state.users.map(user=> {
+
+  return <UserCard key={user.data.id} user={user.data.attributes} />}) */
+
 
   render() {
     const { users } = this.props;
-    let userCards = users
-      ? users.map(user => (
-          <UserCard key={user.id} user={user} userShow={this.userShow} />
-        ))
-      : "no users";
 
+    if (users.length > 0) {
     return (
-      <div className="ui main">
-        {this.state.userShow.id ? (
-          <ProfilePage user={this.state.userShow} />
-        ) : (
-          <Card.Group itemsPerRow={5}> {userCards} </Card.Group>
-        )}
-      </div>
-    );
-  }
+      <Card.Group itemsPerRow={5} className="ui main">
+        {userCards}
+      </Card.Group>
+    ) }
+
+    else {
+      return (
+        <Header as='h2' icon textAlign='center'>
+          <Icon name='users' circular />
+          <Header.Content>Please Log In to start ruining everyone </Header.Content>
+        </Header>
+      )
+    }
 }
 
 const mapStateToProps = state => {
