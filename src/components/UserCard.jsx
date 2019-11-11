@@ -12,6 +12,9 @@ const UserCard = ( {user} ) => (
         {user.bio}
       </Card.Description>
     </Card.Content>
+    <Card.Content extra>
+      <Icon name="heart" color="red" />
+    </Card.Content>
   </Card>
 )
 
