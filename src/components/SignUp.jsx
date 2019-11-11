@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { addUser } from "../store/actions/addUser";
+import { addUser } from "../store/actions/users";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card } from "semantic-ui-react";

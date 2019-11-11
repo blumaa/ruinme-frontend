@@ -3,8 +3,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 const UserCard = ( {user, userShow} ) => (
-  <Link to={'/profile/' + user.id}>
-    <Card className="ui raised link" >
+    <Card className="ui raised link" as={ Link } to={'/profile/' + user.id}>
       <Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' wrapped ui={false} />
       <Card.Content>
           <Card.Header>{user.display_name}</Card.Header>
@@ -16,7 +15,6 @@ const UserCard = ( {user, userShow} ) => (
         </Card.Description>
       </Card.Content>
     </Card>
-  </Link>
 )
 
 export default UserCard

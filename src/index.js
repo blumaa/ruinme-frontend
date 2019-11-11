@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
+import NavBar from "./components/Navbar";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/rootReducer";
@@ -19,6 +20,7 @@ const store = createStore(rootReducer, middleware);
 ReactDOM.render(
   <Provider store={store}>
     <Router>
+      <NavBar />
       <App />
     </Router>
   </Provider>,

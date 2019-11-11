@@ -4,7 +4,7 @@ import UserCard from "./UserCard";
 import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { fetchUsers } from "../store/actions/fetchUsers";
+import { fetchUsers } from "../store/actions/users";
 
 class ExplorePage extends Component {
   state = {

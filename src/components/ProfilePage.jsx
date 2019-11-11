@@ -12,7 +12,6 @@ class ProfilePage extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    const { match: { params } } = this.props;
     const { activeItem } = this.state;
     const { display_name, age, gender, bio } = this.props.user;
     const { handleBackButton, id } = this.props;
@@ -31,7 +30,7 @@ class ProfilePage extends Component {
           <Header as="h4">Gender: {gender}</Header>
           <Header as="h4">Bio:</Header>
           <p>{bio}</p>
-          <NavLink to={"/explore"}>
+          <NavLink to={"/"}>
             <button className="ui button"> Back</button>
           </NavLink>
         </Container>
