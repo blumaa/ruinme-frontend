@@ -1,12 +1,27 @@
 import React, {Component} from 'react';
 import { Card, Header, Icon } from 'semantic-ui-react'
 import UserCard from './UserCard'
+import ProfilePage from "./ProfilePage";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchUsers } from "../store/actions/users";
 
-const USER_API = 'http://localhost:3001/users'
-
-export default class ExplorePage extends Component {
-
+class ExplorePage extends Component {
   state = {
+    userShow: {}
+  };
+
+  componentDidMount = () => {
+    this.props.getUsers();
+  };
+
+  userShow = user => {
+    console.log(user);
+    this.setState({ userShow: [user] });
+  };
+
+
+ /* state = {
     users: []
   }
 
@@ -27,17 +42,18 @@ export default class ExplorePage extends Component {
     else {
 
     }
-  }
+  } */
+  /* let userCards = this.state.users.map(user=> {
+
+  return <UserCard key={user.data.id} user={user.data.attributes} />}) */
+
 
   render() {
+    const { users } = this.props;
 
-  let userCards = this.state.users.map(user=> {
-  
-  return <UserCard key={user.data.id} user={user.data.attributes} />})
-
-    if (this.state.users.length > 0) {
+    if (users.length > 0) {
     return (
-      <Card.Group>
+      <Card.Group itemsPerRow={5} className="ui main">
         {userCards}
       </Card.Group>
     ) }
@@ -45,11 +61,24 @@ export default class ExplorePage extends Component {
     else {
       return (
         <Header as='h2' icon textAlign='center'>
-      <Icon name='users' circular />
-      <Header.Content>Please Log In to start ruining everyone </Header.Content>
-    </Header>
+          <Icon name='users' circular />
+          <Header.Content>Please Log In to start ruining everyone </Header.Content>
+        </Header>
       )
     }
-  }
-
 }
+
+const mapStateToProps = state => {
+  return {
+    users: state.users.users.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return { getUsers: () => dispatch(fetchUsers()) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExplorePage);

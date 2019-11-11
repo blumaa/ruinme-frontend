@@ -12,7 +12,10 @@ code {
     monospace;
 }
 
-.active {
-  color: #FF0000;
-  font-size: 1.5em;
+.ui.item {
+  padding-top: 55px;
+}
+
+.ui.main {
+  padding-top: 55px;
 }
