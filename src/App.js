@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch} from 'react-router-dom'
-import NavBar from './components/Navbar'
 import style from './index.css'
 import ExplorePage from './components/ExplorePage'
 import SignUpForm from './components/SignUpForm'
