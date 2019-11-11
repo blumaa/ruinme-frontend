@@ -1,8 +1,8 @@
-const userReducer = (state = { users: [], requesting: false }, action) => {
+const userReducer = (state = { all: [], requesting: false }, action) => {
   switch (action.type) {
     case "FETCH_USERS":
       return {
-        users: action.users,
+        all: action.users,
         requesting: true
       };
     case "ADD_USER":

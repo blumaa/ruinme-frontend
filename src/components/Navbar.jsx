@@ -9,9 +9,14 @@ const NavBar = props => {
               Profile
             </NavLink>
           ) : (
-            <NavLink to="/sign_up" className="blue item">
-              Sign Up
-            </NavLink>
+            <>
+              <NavLink to="/sign_up" className="blue item">
+                Sign Up
+              </NavLink>
+              <NavLink to="/login" className="red item">
+                Login
+              </NavLink>
+            </>
           )}
           <NavLink to="/explore" className="olive item">
             Explore{" "}

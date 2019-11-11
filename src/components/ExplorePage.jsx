@@ -20,43 +20,15 @@ class ExplorePage extends Component {
     this.setState({ userShow: [user] });
   };
 
-
- /* state = {
-    users: []
-  }
-
-  async componentDidMount() {
-    let resp = await fetch(USER_API, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    })
-    let userData = await resp.json()
-
-    if (userData.data) {
-    console.log(userData)
-    this.setState({
-      users: [...userData.data]
-    }, ()=>console.log(this.state)) }
-    else {
-
-    }
-  } */
-  /* let userCards = this.state.users.map(user=> {
-
-  return <UserCard key={user.data.id} user={user.data.attributes} />}) */
-
-
   render() {
-    const { users } = this.props;
 
-    if (users.length > 0) {
-    return (
-      <Card.Group itemsPerRow={5} className="ui main">
-        {userCards}
-      </Card.Group>
-    ) }
+    if (this.props.userData) {
+      const userCards = this.props.userData.map(user=> <UserCard key={user.id} user={user} />)
+      return (
+        <Card.Group itemsPerRow={5} className="ui main">
+          {userCards}
+        </Card.Group>
+      ) }
 
     else {
       return (
@@ -66,11 +38,12 @@ class ExplorePage extends Component {
         </Header>
       )
     }
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    users: state.users.users.data
+    userData: state.User.all
   };
 };
 

@@ -43,7 +43,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(state);
   let id = ownProps.match.params.user_id;
   return {
-    user: state.users.users.data.find(user => {
+    user: state.User.all.find(user => {
       return user.id === parseInt(id);
     })
   };

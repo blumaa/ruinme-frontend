@@ -18,7 +18,7 @@ export default class SignUpForm extends Component {
 
 
     handleSubmit = async () => {
-        
+
         const newUser = this.state
         delete newUser.passwordConfirm
         console.log(newUser)
@@ -26,7 +26,7 @@ export default class SignUpForm extends Component {
         const req = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: payload
         }
@@ -35,7 +35,7 @@ export default class SignUpForm extends Component {
         const data = await resp.json()
         console.log(data, data.user, data.token)
         localStorage.setItem('token', data.token)
-        
+        this.props.history.push('/explore')
     }
 
     handleChange = (event) => {
@@ -49,7 +49,7 @@ export default class SignUpForm extends Component {
     // validates 8 characters, 1 upper case, 1 lower case, 1 symbol in password
     validatePassword = () => {
        const regEx= /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-       return regEx.test(this.state.password) 
+       return regEx.test(this.state.password)
     }
 
     matchPasswords = () => {
@@ -61,7 +61,7 @@ export default class SignUpForm extends Component {
         const passwordsMatch = this.state.password === this.state.passwordConfirm ? "Passwords match" : "Passwords MUST match"
 
 
-        return <Form onSubmit={this.handleSubmit} onChange={this.handleChange} >
+        return <Form onSubmit={this.handleSubmit} onChange={this.handleChange} className="ui main" >
             <Form.Input label='Email' type='email'name="email"id="email-field" required/>
             <Form.Input label='Display Name' name="display_name"id='display-name-field'/>
             <Form.Input label='Age' name="age" min="18" id='age-field' type='number'/>

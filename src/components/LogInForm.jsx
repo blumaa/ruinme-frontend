@@ -13,13 +13,13 @@ export default class LogInForm extends Component {
 
 
     handleSubmit = async () => {
-        
+
         const userCreds = this.state
         const payload = JSON.stringify({user: userCreds})
         const req = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: payload
         }
@@ -28,7 +28,7 @@ export default class LogInForm extends Component {
         const data = await resp.json()
         console.log(data, data.user, data.token)
         localStorage.setItem('token', data.token)
-        
+
     }
 
     handleChange = (event) => {
@@ -39,13 +39,13 @@ export default class LogInForm extends Component {
         }, )
     }
 
-   
+
     render() {
 
         const passwordsMatch = this.state.password === this.state.passwordConfirm ? "Passwords match" : "Passwords MUST match"
 
 
-        return <Form onSubmit={this.handleSubmit} onChange={this.handleChange} >
+        return <Form onSubmit={this.handleSubmit} onChange={this.handleChange} className="ui main">
             <Form.Input label='Email' type='email'name="email"id="email-field" required/>
             <Form.Input label='Enter Password' name="password"type='password' id='password-field' required/>
             <Button type='submit'>Submit</Button>
