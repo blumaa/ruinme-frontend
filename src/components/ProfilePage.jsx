@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Header, Image, Container, Button } from "semantic-ui-react";
+import { Header, Image, Container, Button, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import MatchButton from "./MatchButton";
+import { fetchProfile } from "../store/actions/users";
 
 class ProfilePage extends Component {
   state = {
@@ -11,42 +13,60 @@ class ProfilePage extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  componentDidMount = () => {
+    if (!this.props.User) {
+      this.props.getProfile(this.props.match.params.user_id);
+    }
+  };
+
   render() {
     const { activeItem } = this.state;
-    const { display_name, age, gender, bio } = this.props.user;
     const { handleBackButton, id } = this.props;
-    return (
-      <div className="ui item">
-        <Container text>
-          <Header as="h2">{display_name}</Header>
+    if (this.props.user) {
+      const { display_name, age, gender, bio } = this.props.user;
+      return (
+        <div className="ui item">
+          <Container text>
+            <Header as="h2">{display_name}</Header>
 
-          <Image
-            align="right"
-            src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-            size="medium"
-            circular
-          />
-          <Header as="h4">Age: {age}</Header>
-          <Header as="h4">Gender: {gender}</Header>
-          <Header as="h4">Bio:</Header>
-          <p>{bio}</p>
-          <NavLink to={"/"}>
-            <button className="ui button"> Back</button>
-          </NavLink>
-        </Container>
-      </div>
-    );
+            <Image
+              align="right"
+              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              size="medium"
+              circular
+            />
+            <Header as="h4">Age: {age}</Header>
+            <Header as="h4">Gender: {gender}</Header>
+            <Header as="h4">Bio:</Header>
+            <p>{bio}</p>
+            <NavLink to={"/"}>
+              <button className="ui button"> Back</button>
+            </NavLink>
+            <MatchButton />
+          </Container>
+        </div>
+      );
+    } else {
+      return <div className="ui main">No user found</div>;
+    }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-  let id = ownProps.match.params.user_id;
-  return {
-    user: state.User.all.find(user => {
-      return user.id === parseInt(id);
+  const id = parseInt(ownProps.match.params.user_id);
+  const user = state.User.all.find(user=> user.id == id) || state.User.profile
+  return ({
+    user
     })
   };
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps.match.params.user_id);
+  const id = ownProps.match.params.user_id;
+  return { getProfile: id => dispatch(fetchProfile(id)) };
 };
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfilePage);

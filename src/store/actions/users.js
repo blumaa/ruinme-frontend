@@ -22,6 +22,30 @@ export const fetchUsers = () => {
   };
 };
 
+export const FETCH_PROFILE = "FETCH_PROFILE";
+
+export const getProfile = user => ({ type: FETCH_PROFILE, user });
+export const fetchProfile = (id) => {
+  console.log('fetchProfile id', id)
+  return async dispatch => {
+    try {
+      const reqObj = {
+        method: 'GET',
+        headers: { 'Content-Type' : 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+      const response = await fetch("http://localhost:3001/users/" + id, reqObj);
+      const json = await response.json();
+      const profile = json.data.data.attributes
+      dispatch(getProfile(profile));
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
+};
+
+
 
 /* export const addUser = (user) => {
   const ageInt = parseInt(user.age)
@@ -44,5 +68,4 @@ export const fetchUsers = () => {
       .then(response => response.json())
       .then(user => dispatch({ type: 'ADD_USER', user }));
   };
-}
-*/
+} */

@@ -5,11 +5,11 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         all: action.users,
         requesting: true
       };
-    case "ADD_USER":
+    case "FETCH_PROFILE":
       return {
         ...state,
-        users: action.user,
-        requesting: false
+        profile: action.user,
+        requesting: true
       };
     default:
       return state;
