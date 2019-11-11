@@ -1,19 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'
-
-
-const NavBar = (props) => {
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Fragment } from "react";
+const NavBar = props => {
   return (
-    <div className="App">
-      {props.user ?
-      <NavLink to='/profile' activeClassName='active'> Profile</NavLink>
-      : <NavLink to='/signup' activeClassName='active'>Sign Up</NavLink> }
-
-      <NavLink to='/explore' activeClassName="active"> Explore </NavLink>
-      <NavLink to='/messages' activeClassName="active"> Messages </NavLink>
-    </div>
+    <>
+      <div className="ui fixed inverted menu">
+          {props.user ? (
+            <NavLink to="/profile" className="red item">
+              Profile
+            </NavLink>
+          ) : (
+            <NavLink to="/signup" className="blue item">
+              Sign Up
+            </NavLink>
+          )}
+          <NavLink to="/explore" className="olive item">
+            Explore{" "}
+          </NavLink>
+          <NavLink to="/messages" className="yellow item">
+            Messages{" "}
+          </NavLink>
+      </div>
+    </>
   );
-}
+};
 
 export default NavBar;

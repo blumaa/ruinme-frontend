@@ -1,33 +1,60 @@
-import React, {Component} from 'react';
-import { Card } from 'semantic-ui-react'
-import UserCard from './UserCard'
+import React, { Component } from "react";
+import { Card } from "semantic-ui-react";
+import UserCard from "./UserCard";
+import ProfilePage from "./ProfilePage";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchUsers } from "../store/actions/users";
 
-const USER_API = 'http://localhost:3001/users'
-
-export default class ExplorePage extends Component {
-
+class ExplorePage extends Component {
   state = {
-    users: []
-  }
+    userShow: {}
+  };
 
-  async componentDidMount() {
-    let resp = await fetch(USER_API)
-    let userData = await resp.json()
-    console.log(userData)
-    this.setState({
-      users: [...userData.data]
-    }, ()=>console.log(this.state))
-  }
+  componentDidMount = () => {
+    this.props.getUsers();
+  };
+
+  userShow = user => {
+    console.log(user);
+    this.setState({ userShow: [user] });
+  };
+
+  handleBackButton = event => {
+    this.setState({ userShow: [] });
+  };
 
   render() {
-
-    let userCards = this.state.users.map(user=> <UserCard key={user.id} user={user} />)
+    const { users } = this.props;
+    let userCards = users
+      ? users.map(user => (
+          <UserCard key={user.id} user={user} userShow={this.userShow} />
+        ))
+      : "no users";
 
     return (
-      <Card.Group>
-        {userCards}
-      </Card.Group>
-    )
+      <div className="ui main">
+        {this.state.userShow.id ? (
+          <ProfilePage user={this.state.userShow} />
+        ) : (
+          <Card.Group itemsPerRow={5}> {userCards} </Card.Group>
+        )}
+      </div>
+    );
   }
-
 }
+
+const mapStateToProps = state => {
+  return {
+    users: state.users.users.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return { getUsers: () => dispatch(fetchUsers()) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExplorePage);
