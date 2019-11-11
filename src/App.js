@@ -13,8 +13,7 @@ function App() {
       <Switch>
         <Route path="/signup" component={SignUp} />
         <Route path="/explore" component={ExplorePage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/:user_id" component={ProfilePage} />
+\        <Route path="/profile/:user_id" component={ProfilePage} />
       </Switch>
     </div>
   );

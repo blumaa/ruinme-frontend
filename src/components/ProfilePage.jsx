@@ -12,9 +12,10 @@ class ProfilePage extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
+    const { match: { params } } = this.props;
     const { activeItem } = this.state;
     const { display_name, age, gender, bio } = this.props.user;
-    const { handleBackButton } = this.props;
+    const { handleBackButton, id } = this.props;
     return (
       <div className="ui item">
         <Container text>
