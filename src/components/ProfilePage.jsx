@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Image, Container, Button, Icon } from "semantic-ui-react";
+import { Header, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import MatchButton from "./MatchButton";
@@ -20,8 +20,6 @@ class ProfilePage extends Component {
   };
 
   render() {
-    const { activeItem } = this.state;
-    const { handleBackButton, id } = this.props;
     if (this.props.user) {
       const { display_name, age, gender, bio } = this.props.user;
       return (
@@ -54,7 +52,7 @@ class ProfilePage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const id = parseInt(ownProps.match.params.user_id);
-  const user = state.User.all.find(user=> user.id == id) || state.User.profile
+  const user = state.User.all.find(user=> user.id === id) || state.User.profile
   return ({
     user
     })
@@ -62,7 +60,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   console.log(ownProps.match.params.user_id);
-  const id = ownProps.match.params.user_id;
   return { getProfile: id => dispatch(fetchProfile(id)) };
 };
 

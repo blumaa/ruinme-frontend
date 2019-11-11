@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { Card, Header, Icon } from 'semantic-ui-react'
 import UserCard from './UserCard'
-import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { fetchUsers } from "../store/actions/users";
 
 class ExplorePage extends Component {
