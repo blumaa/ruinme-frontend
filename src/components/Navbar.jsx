@@ -6,7 +6,7 @@ const NavBar = props => {
     <>
       <div className="ui fixed inverted menu">
           {props.user ? (
-            <NavLink to="/profile" className="olive item">
+            <NavLink to="/profile" className="red item">
               Profile
             </NavLink>
           ) : (

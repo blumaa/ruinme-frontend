@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const UserCard = ( {user, userShow} ) => (
   <Link to={'/' + user.id}>
-    <Card >
+    <Card className="ui link">
       <Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' wrapped ui={false} />
       <Card.Content>
           <Card.Header>{user.display_name}</Card.Header>

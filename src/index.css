@@ -13,9 +13,9 @@ code {
 }
 
 .ui.item {
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
-.ui.main.text.container {
-  padding-top: 60px;
+.ui.main {
+  padding-top: 55px;
 }

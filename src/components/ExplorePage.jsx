@@ -26,8 +26,6 @@ class ExplorePage extends Component {
 
   render() {
     const { users } = this.props;
-    console.log("kjasehgkjhaeskgesa", users);
-
     let userCards = users.data
       ? users.data.map(user => (
           <UserCard key={user.id} user={user} userShow={this.userShow} />
@@ -35,11 +33,11 @@ class ExplorePage extends Component {
       : "no users";
 
     return (
-      <div className="ui main text container">
+      <div className="ui main">
         {this.state.userShow.id ? (
           <ProfilePage user={this.state.userShow} />
         ) : (
-          <Card.Group> {userCards} </Card.Group>
+          <Card.Group itemsPerRow={6}> {userCards} </Card.Group>
         )}
       </div>
     );
