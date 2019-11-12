@@ -11,6 +11,13 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         profile: action.user,
         requesting: true
       };
+    case "FETCH_AUTH":
+      return {
+        ...state,
+        current_user: action.user,
+        relationships: action.relationships,
+        requesting: true
+      };
     default:
       return state;
   }

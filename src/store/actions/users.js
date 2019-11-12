@@ -45,6 +45,30 @@ export const fetchProfile = (id) => {
   };
 };
 
+export const FETCH_AUTH = "FETCH_AUTH";
+
+export const getCurrentUser = current_user => ({ type: FETCH_AUTH, current_user });
+export const fetchCurrentUser = () => {
+  return async dispatch => {
+    try {
+      const reqObj = {
+        method: 'GET',
+        headers: { 'Content-Type' : 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+
+
+      const response = await fetch("http://localhost:3001/profile", reqObj);
+      const json = await response.json();
+      console.log(json)
+      dispatch(getCurrentUser(json));
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
+};
+
 
 
 /* export const addUser = (user) => {
