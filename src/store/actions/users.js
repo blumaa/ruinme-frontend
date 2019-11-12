@@ -5,16 +5,17 @@ export const fetchUsers = () => {
   return async dispatch => {
     try {
       const reqObj = {
-        method: 'GET',
-        headers: { 'Content-Type' : 'application/json',
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-      }
+      };
       const response = await fetch("http://localhost:3001/users", reqObj);
       const json = await response.json();
-      console.log(json)
-      const users = json.data.map(user=> user.data.attributes)
-      console.log(users)
+      console.log(json);
+      const users = json.data.map(user => user.data.attributes);
+      console.log(users);
       dispatch(getUsers(users));
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -25,19 +26,20 @@ export const fetchUsers = () => {
 export const FETCH_PROFILE = "FETCH_PROFILE";
 
 export const getProfile = user => ({ type: FETCH_PROFILE, user });
-export const fetchProfile = (id) => {
-  console.log('fetchProfile id', id)
+export const fetchProfile = id => {
+  console.log("fetchProfile id", id);
   return async dispatch => {
     try {
       const reqObj = {
-        method: 'GET',
-        headers: { 'Content-Type' : 'application/json',
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-      }
+      };
       const response = await fetch("http://localhost:3001/users/" + id, reqObj);
       const json = await response.json();
-      const profile = json.data.data.attributes
+      const profile = json.data.data.attributes;
       dispatch(getProfile(profile));
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -47,18 +49,20 @@ export const fetchProfile = (id) => {
 
 export const FETCH_AUTH = "FETCH_AUTH";
 
-export const getCurrentUser = current_user => ({ type: FETCH_AUTH, current_user });
+export const getCurrentUser = user => ({
+  type: FETCH_AUTH,
+  user
+});
 export const fetchCurrentUser = () => {
   return async dispatch => {
     try {
       const reqObj = {
-        method: 'GET',
-        headers: { 'Content-Type' : 'application/json',
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-      }
-
-
+      };
       const response = await fetch("http://localhost:3001/profile", reqObj);
       const json = await response.json();
       console.log(json)
@@ -68,8 +72,6 @@ export const fetchCurrentUser = () => {
     }
   };
 };
-
-
 
 /* export const addUser = (user) => {
   const ageInt = parseInt(user.age)
