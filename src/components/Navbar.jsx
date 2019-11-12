@@ -11,10 +11,13 @@ const NavBar = props => {
             </NavLink>
             <NavLink to="/login" className="blue item" onClick={()=> {localStorage.removeItem("token"); window.location.reload()}}>Logout</NavLink>
             <NavLink to="/explore" className="olive item">
-            Explore{" "}
+            Explore
             </NavLink>
             <NavLink to="/messages" className="yellow item">
-            Messages{" "}
+            Messages
+            </NavLink>
+            <NavLink to="/requests" className="pink item">
+            Requests
             </NavLink>
             </>
           ) : (

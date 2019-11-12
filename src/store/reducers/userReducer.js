@@ -20,12 +20,18 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         requesting: true
       };
     case "ADD_RELATIONSHIP":
-    console.log('add relationship state.user', state.relationships)
       return {
         ...state,
         relationships: [...state.relationships, action.relationship],
         requesting: true
       };
+      case "ACCEPT_OR_DECLINE_RELATIONSHIP":
+        const relationships = state.relationships.filter(rel => !(rel.relationship_id === action.relationship.relationship_id))
+        return {
+          ...state,
+          relationships: [...relationships, action.relationship],
+          requesting: true
+        };
 
     default:
       return state;
