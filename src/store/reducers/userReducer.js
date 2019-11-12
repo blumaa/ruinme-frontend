@@ -2,6 +2,7 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
   switch (action.type) {
     case "FETCH_USERS":
       return {
+        ...state,
         all: action.users,
         requesting: true
       };
@@ -14,8 +15,8 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
     case "FETCH_AUTH":
       return {
         ...state,
-        current_user: action.user,
-        relationships: action.relationships,
+        current_user: action.current_user.user,
+        relationships: action.current_user.relationships,
         requesting: true
       };
     default:
