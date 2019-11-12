@@ -9,7 +9,7 @@ const RelationshipList = (props) => {
 
     if (props.relationships) {
     relationshipsItems = props.relationships.map(relationship=> {
-        return <Menu.Item active={props.activeRelationship === relationship}> <RelationshipItem  user={props.user} relationship={relationship} selectRelationship={props.selectRelationship}/></Menu.Item>
+        return <Menu.Item key={relationship.relationship_id} active={props.activeRelationship === relationship}> <RelationshipItem user={props.user} relationship={relationship} selectRelationship={props.selectRelationship}/></Menu.Item>
     }) }
 
 

@@ -19,6 +19,14 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         relationships: action.current_user.relationships,
         requesting: true
       };
+    case "ADD_RELATIONSHIP":
+    console.log('add relationship state.user', state.relationships)
+      return {
+        ...state,
+        relationships: [...state.relationships, action.relationship],
+        requesting: true
+      };
+
     default:
       return state;
   }

@@ -1,21 +1,21 @@
-export const SELECT_RELATIONSHIP = "SELECT_RELATIONSHIP"
+export const ADD_RELATIONSHIP = "ADD_RELATIONSHIP"
 
-export const getUsers = users => ({ type: FETCH_USERS, users });
-export const fetchUsers = () => {
+export const requestRelationship = relationship => ({ type: ADD_RELATIONSHIP, relationship });
+export const makeRelationship = (userId) => {
   return async dispatch => {
     try {
       const reqObj = {
-        method: 'GET',
+        method: 'POST',
         headers: { 'Content-Type' : 'application/json',
           Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+        },
+        body: JSON.stringify({
+          user_id: userId
+        })
       }
-      const response = await fetch("http://localhost:3001/users", reqObj);
+      const response = await fetch("http://localhost:3001/relationships", reqObj);
       const json = await response.json();
-      console.log(json)
-      const users = json.data.map(user=> user.data.attributes)
-      console.log(users)
-      dispatch(getUsers(users));
+      dispatch(requestRelationship(json));
     } catch (error) {
       console.error("Error fetching users:", error);
     }
