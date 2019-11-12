@@ -49,9 +49,9 @@ export const fetchProfile = id => {
 
 export const FETCH_AUTH = "FETCH_AUTH";
 
-export const getCurrentUser = user => ({
+export const getCurrentUser = current_user => ({
   type: FETCH_AUTH,
-  user
+  current_user
 });
 export const fetchCurrentUser = () => {
   return async dispatch => {

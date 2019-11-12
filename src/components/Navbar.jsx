@@ -4,10 +4,22 @@ const NavBar = props => {
   return (
     <>
       <div className="ui fixed inverted menu">
-          {props.user ? (
+          {props.currentUser ? (
+            <>
             <NavLink to="/profile" className="red item">
               Profile
             </NavLink>
+            <NavLink to="/login" className="blue item" onClick={()=> {localStorage.removeItem("token"); window.location.reload()}}>Logout</NavLink>
+            <NavLink to="/explore" className="olive item">
+            Explore
+            </NavLink>
+            <NavLink to="/messages" className="yellow item">
+            Messages
+            </NavLink>
+            <NavLink to="/requests" className="pink item">
+            Requests
+            </NavLink>
+            </>
           ) : (
             <>
               <NavLink to="/sign_up" className="blue item">
@@ -18,15 +30,6 @@ const NavBar = props => {
               </NavLink>
             </>
           )}
-          <NavLink to="/myprofile" className="green item">
-            My Profile
-          </NavLink>
-          <NavLink to="/explore" className="olive item">
-            Explore
-          </NavLink>
-          <NavLink to="/messages" className="yellow item">
-            Messages
-          </NavLink>
       </div>
     </>
   );

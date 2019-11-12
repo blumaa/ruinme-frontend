@@ -20,7 +20,6 @@ const store = createStore(rootReducer, middleware);
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <NavBar />
       <App />
     </Router>
   </Provider>,
