@@ -26,12 +26,21 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         requesting: true
       };
       case "ACCEPT_OR_DECLINE_RELATIONSHIP":
+      if (action.relationship.decision == 'accept') {
         const relationships = state.relationships.filter(rel => !(rel.relationship_id === action.relationship.relationship_id))
         return {
           ...state,
           relationships: [...relationships, action.relationship],
           requesting: true
         };
+      } else if (action.relationship.decision == 'declined') {
+        const relationships = state.relationships.filter(rel => !(rel.relationship_id === action.relationship.relationship_id))
+        return {
+          ...state,
+          relationships: [...relationships],
+          requesting: true
+        };
+      }
 
     default:
       return state;
