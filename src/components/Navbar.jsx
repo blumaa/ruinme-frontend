@@ -18,11 +18,14 @@ const NavBar = props => {
               </NavLink>
             </>
           )}
+          <NavLink to="/myprofile" className="green item">
+            My Profile
+          </NavLink>
           <NavLink to="/explore" className="olive item">
-            Explore{" "}
+            Explore
           </NavLink>
           <NavLink to="/messages" className="yellow item">
-            Messages{" "}
+            Messages
           </NavLink>
       </div>
     </>

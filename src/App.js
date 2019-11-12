@@ -5,6 +5,7 @@ import ExplorePage from './components/ExplorePage'
 import SignUpForm from './components/SignUpForm'
 import LogInForm from './components/LogInForm';
 import ProfilePage from "./components/ProfilePage";
+import MyProfile from "./components/MyProfile";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/explore" component={ExplorePage} />
         <Route path="/sign_up" component={SignUpForm} />
         <Route path="/login" component={LogInForm} />
+        <Route path="/myprofile" component={MyProfile} />
         <Route exact path="/profile/:user_id" component={ProfilePage} />
       </Switch>
     </div>

@@ -3,6 +3,7 @@ import { Card, Header, Icon } from 'semantic-ui-react'
 import UserCard from './UserCard'
 import { connect } from "react-redux";
 import { fetchUsers } from "../store/actions/users";
+import SetsUserAuthState from '../HigherOrderConcerns/getAuthState'
 
 class ExplorePage extends Component {
   state = {
@@ -48,6 +49,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return { getUsers: () => dispatch(fetchUsers()) };
 };
+
 
 export default connect(
   mapStateToProps,
