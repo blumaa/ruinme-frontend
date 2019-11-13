@@ -4,12 +4,12 @@ const NavBar = props => {
   return (
     <>
       <div className="ui fixed inverted menu">
-          {props.currentUser ? (
+          {props.currentUser && localStorage.getItem("token") ? (
             <>
             <NavLink to="/profile" className="red item">
               {props.currentUser.display_name}
             </NavLink>
-            <NavLink to="/login" className="blue item" onClick={()=> {localStorage.removeItem("token"); window.location.reload()}}>Logout</NavLink>
+            <NavLink to="/login" className="blue item" onClick={()=> {localStorage.removeItem("token"); props.history.push('/login')}}>Logout</NavLink>
             <NavLink to="/explore" className="olive item">
             Explore
             </NavLink>

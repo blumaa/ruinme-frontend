@@ -13,6 +13,13 @@ class LogInForm extends Component {
         password: ""
     }
 
+    componentDidMount() {
+      if (localStorage.getItem("token")) {
+        this.props.history.push('/explore')
+      }
+
+    }
+
 
     handleSubmit = async () => {
 
@@ -30,10 +37,10 @@ class LogInForm extends Component {
         const data = await resp.json()
         console.log(data, data.user, data.token)
         if (data.token) {
-        localStorage.setItem('token', data.token) 
+        localStorage.setItem('token', data.token)
         this.props.getCurrentUser()
         this.props.history.push('/explore')
-        
+
     }
 
 
@@ -63,8 +70,14 @@ class LogInForm extends Component {
 
 }
 
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.User.current_user
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
         return { getCurrentUser: ()=> dispatch(fetchCurrentUser())}
 }
 
-export default connect(null, mapDispatchToProps)(LogInForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm)

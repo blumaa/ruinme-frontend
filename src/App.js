@@ -22,9 +22,9 @@ class App extends Component {
   render() {
   return (
     <div className="App" style={style}>
-      <NavBar currentUser={this.props.currentUser}/>
+      <Route path="/" render={(props) => <NavBar {...props} currentUser={this.props.currentUser} />} /> 
       <Switch>
-        <Route exact path="/" component={ExplorePage} />
+        <Route exact path="/" component={LogInForm} />
         <Route exact path="/explore" component={ExplorePage} />
         <Route exact path="/sign_up" component={SignUpForm} />
         <Route exact path="/login" component={LogInForm} />
