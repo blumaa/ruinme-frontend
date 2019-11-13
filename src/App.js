@@ -5,6 +5,7 @@ import ExplorePage from './components/ExplorePage'
 import SignUpForm from './components/SignUpForm'
 import LogInForm from './components/LogInForm';
 import ProfilePage from "./components/ProfilePage";
+import MyProfile from "./components/MyProfile";
 import MessagesPage from './components/MessagesPage';
 import RelationshipRequestList from './components/RelationshipRequestList';
 import NavBar from './components/Navbar'
@@ -29,7 +30,8 @@ class App extends Component {
         <Route exact path="/login" component={LogInForm} />
         <Route exact path='/messages' component={MessagesPage} />
         <Route exact path='/requests' component={RelationshipRequestList} />
-        <Route exact path="/profile/:user_id" component={ProfilePage} />
+        <Route exact path="/users/:user_id" component={ProfilePage} />
+        <Route exact path="/profile" component={MyProfile} />
       </Switch>
     </div>
   );}

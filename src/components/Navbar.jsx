@@ -7,7 +7,7 @@ const NavBar = props => {
           {props.currentUser ? (
             <>
             <NavLink to="/profile" className="red item">
-              Profile
+              {props.currentUser.display_name}
             </NavLink>
             <NavLink to="/login" className="blue item" onClick={()=> {localStorage.removeItem("token"); window.location.reload()}}>Logout</NavLink>
             <NavLink to="/explore" className="olive item">

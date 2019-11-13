@@ -3,7 +3,7 @@ import { Header, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import MatchButton from "./MatchButton";
-import { fetchProfile } from "../store/actions/users";
+import { fetchProfile, emptyProfile } from "../store/actions/users";
 
 class ProfilePage extends Component {
   state = {
@@ -14,10 +14,16 @@ class ProfilePage extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   componentDidMount = () => {
-    if (!this.props.User) {
+    if (this.props.match) {
       this.props.getProfile(this.props.match.params.user_id);
     }
+
   };
+
+  componentWillUnmount() {
+    this.props.clearProfile()
+  }
+
 
   render() {
     if (this.props.user) {
@@ -40,7 +46,7 @@ class ProfilePage extends Component {
             <NavLink to={"/"}>
               <button className="ui button"> Back</button>
             </NavLink>
-            <MatchButton />
+            <MatchButton id={this}/>
           </Container>
         </div>
       );
@@ -51,16 +57,16 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const id = parseInt(ownProps.match.params.user_id);
-  const user = state.User.all.find(user=> user.id === id) || state.User.profile
+  const user = state.User.profile || state.User.current_user
   return ({
     user
     })
   };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log(ownProps.match.params.user_id);
-  return { getProfile: id => dispatch(fetchProfile(id)) };
+  return { getProfile: id => dispatch(fetchProfile(id)),
+      clearProfile: () => dispatch(emptyProfile())
+    };
 };
 
 export default connect(

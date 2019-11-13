@@ -47,6 +47,11 @@ export const fetchProfile = id => {
   };
 };
 
+export const emptyProfile = () => ({
+  type: "EMPTY_PROFILE"
+});
+
+
 export const FETCH_AUTH = "FETCH_AUTH";
 
 export const getCurrentUser = current_user => ({
