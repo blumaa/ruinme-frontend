@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import { fetchCurrentUser } from '../store/actions/users'
+import { connect } from 'react-redux'
 
 const SIGN_UP = "http://localhost:3001/users"
-
-export default class SignUpForm extends Component {
+class SignUpForm extends Component {
 
 
     state = {
@@ -35,6 +36,7 @@ export default class SignUpForm extends Component {
         const data = await resp.json()
         console.log(data, data.user, data.token)
         localStorage.setItem('token', data.token)
+        this.props.getCurrentUser()
         this.props.history.push('/explore')
     }
 
@@ -76,3 +78,9 @@ export default class SignUpForm extends Component {
     }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+        return { getCurrentUser: ()=> dispatch(fetchCurrentUser())}
+}
+
+export default connect(null, mapDispatchToProps)(SignUpForm)
