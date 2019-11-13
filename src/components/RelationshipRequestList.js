@@ -10,7 +10,7 @@ const RelationshipRequestList = props => {
 
   const requests = props.relationships.filter(rel => {
     console.log(rel.pending)
-    console.log(rel.receiver.id, props.user.id, rel.receiver.id !== props.user.id)
+    console.log(rel.receiver.id, props.user.id, rel.requester.id !== props.user.id)
     return rel.pending && rel.requester.id !== props.user.id
   })
   console.log(requests)

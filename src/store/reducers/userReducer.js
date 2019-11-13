@@ -26,7 +26,8 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         requesting: true
       };
       case "ACCEPT_OR_DECLINE_RELATIONSHIP":
-      if (action.relationship.decision == 'accept') {
+      console.log(action.relationship.pending)
+      if (action.relationship.decision == 'accepted') {
         const relationships = state.relationships.filter(rel => !(rel.relationship_id === action.relationship.relationship_id))
         return {
           ...state,
