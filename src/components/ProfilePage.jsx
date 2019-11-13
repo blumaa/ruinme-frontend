@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import MatchButton from "./MatchButton";
 import { fetchProfile, emptyProfile } from "../store/actions/users";
+import ReviewCreateModal from './ReviewCreateModal'
 
 class ProfilePage extends Component {
   state = {
@@ -14,6 +15,7 @@ class ProfilePage extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   componentDidMount = () => {
+    console.log(this.props.match)
     if (this.props.match) {
       this.props.getProfile(this.props.match.params.user_id);
     }
@@ -26,7 +28,7 @@ class ProfilePage extends Component {
 
 
   render() {
-    if (this.props.user) {
+    if (!!this.props.user) {
       const { display_name, age, gender, bio } = this.props.user;
       return (
         <div className="ui item">
@@ -46,7 +48,8 @@ class ProfilePage extends Component {
             <NavLink to={"/"}>
               <button className="ui button"> Back</button>
             </NavLink>
-            <MatchButton id={this}/>
+            <MatchButton id={this.props.user.id}/>
+            <ReviewCreateModal user={this.props.user}/>
           </Container>
         </div>
       );

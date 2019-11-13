@@ -13,12 +13,12 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         requesting: true
       };
 
-      case "EMPTY_PROFILE":
-        return {
-          ...state,
-          profile: null,
-          requesting: true
-        };
+    case "EMPTY_PROFILE":
+      return {
+        ...state,
+        profile: null,
+        requesting: true
+      };
 
     case "FETCH_AUTH":
       return {
@@ -68,7 +68,7 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         ...selectedRelationship,
         messages: [...selectedRelationship.messages, action.content.data]
       };
-      console.log("updatedRelationship", updatedRelationship)
+      console.log("updatedRelationship", updatedRelationship);
       return {
         ...state,
         relationships: [...oldRelationships, updatedRelationship],
@@ -76,12 +76,12 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
         requesting: true
       };
 
-      case "SET_SHOW_RELATIONSHIP":
-        return {
-          ...state,
-          showRelationship: action.relationship,
-          requesting: true
-        };
+    case "SET_SHOW_RELATIONSHIP":
+      return {
+        ...state,
+        showRelationship: action.relationship,
+        requesting: true
+      };
 
     default:
       return state;

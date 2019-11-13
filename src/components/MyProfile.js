@@ -3,6 +3,8 @@ import { Header, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { fetchReviews, fetchCurrentUser } from "../store/actions/users";
 import ProfilePage from "./ProfilePage";
+import UserAnalytics from "./UserAnalytics";
+
 
 class MyProfilePage extends Component {
   componentDidMount = () => {
@@ -13,6 +15,7 @@ class MyProfilePage extends Component {
     return (
       <div className="ProfilePage">
         <ProfilePage user={this.props.user} />
+        <UserAnalytics />
       </div>
     );
   }
