@@ -19,9 +19,6 @@ const NavBar = props => {
             <NavLink to="/requests" className="pink item">
             Requests
             </NavLink>
-            <NavLink to="/imageTest" className="pink item">
-            Image Test
-            </NavLink>
             </>
           ) : (
             <>
