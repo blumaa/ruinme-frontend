@@ -13,9 +13,7 @@ export const fetchUsers = () => {
       };
       const response = await fetch("http://localhost:3001/users", reqObj);
       const json = await response.json();
-      console.log(json);
-      const users = json.data.map(user => user.data.attributes);
-      console.log(users);
+      const users = json.data.map(element => {return{...element.user.data.attributes, img_url: element.img_url}} );
       dispatch(getUsers(users));
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -27,7 +25,6 @@ export const FETCH_PROFILE = "FETCH_PROFILE";
 
 export const getProfile = user => ({ type: FETCH_PROFILE, user });
 export const fetchProfile = id => {
-  console.log("fetchProfile id", id);
   return async dispatch => {
     try {
       const reqObj = {
@@ -39,7 +36,7 @@ export const fetchProfile = id => {
       };
       const response = await fetch("http://localhost:3001/users/" + id, reqObj);
       const json = await response.json();
-      const profile = json.data.data.attributes;
+      const profile = {...json.data.data.attributes, img_url: json.img_url};
       dispatch(getProfile(profile));
     } catch (error) {
       console.error("Error fetching user:", error);

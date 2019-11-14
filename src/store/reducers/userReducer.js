@@ -23,8 +23,9 @@ const userReducer = (state = { all: [], requesting: false }, action) => {
     case "FETCH_AUTH":
       return {
         ...state,
-        current_user: action.current_user.user,
+        current_user: {...action.current_user.user, img_url: action.current_user.img_url},
         relationships: action.current_user.relationships,
+
         requesting: true
       };
     case "ADD_RELATIONSHIP":

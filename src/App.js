@@ -8,6 +8,7 @@ import ProfilePage from "./components/ProfilePage";
 import MyProfile from "./components/MyProfile";
 import MessagesPage from './components/MessagesPage';
 import RelationshipRequestList from './components/RelationshipRequestList';
+import ImageTestForm from './components/ImageTestForm';
 import NavBar from './components/Navbar'
 import { connect } from 'react-redux'
 import { fetchCurrentUser } from './store/actions/users'
@@ -22,7 +23,7 @@ class App extends Component {
   render() {
   return (
     <div className="App" style={style}>
-      <Route path="/" render={(props) => <NavBar {...props} currentUser={this.props.currentUser} />} /> 
+      <Route path="/" render={(props) => <NavBar {...props} currentUser={this.props.currentUser} />} />
       <Switch>
         <Route exact path="/" component={LogInForm} />
         <Route exact path="/explore" component={ExplorePage} />
@@ -32,6 +33,7 @@ class App extends Component {
         <Route exact path='/requests' component={RelationshipRequestList} />
         <Route exact path="/users/:user_id" component={ProfilePage} />
         <Route exact path="/profile" component={MyProfile} />
+        <Route exact path="/imageTest" component={ImageTestForm} />
       </Switch>
     </div>
   );}
