@@ -10,7 +10,7 @@ const MessagesShow = ({ messages, currentUser, showRelationship, matchedUser }) 
         : showRelationship.receiver;
     return (
       <Comment key={message.id}>
-        <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+        <Comment.Avatar src={author.img_url} />
         <Comment.Content>
           <Comment.Author>{author.display_name}</Comment.Author>
           <Comment.Metadata>

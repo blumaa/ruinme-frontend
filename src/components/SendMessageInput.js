@@ -17,8 +17,9 @@ class SendMessageInput extends Component {
     return(
       <Input
         onChange={this.handleChange}
+        value={this.state.content}
         action={
-          <Button onClick={() => this.props.sendMessage(this.state.content, this.props.id)}>Send</Button>
+          <Button onClick={() => {this.props.sendMessage(this.state.content, this.props.id); this.setState({content: ""})}}>Send</Button>
         }
         placeholder="Your message..."
         className="row"

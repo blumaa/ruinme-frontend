@@ -9,15 +9,15 @@ const SIGN_UP = "http://localhost:3001/sign_up"
 class SignUpForm extends Component {
 
     state = {
-        email: "snap@gmail.com",
-        display_name: "snap",
-        age: 90,
-        gender: "meh",
-        bio: "this is the bio",
-        password: "12345",
-        passwordConfirm: "12345",
+        email: "",
+        display_name: "",
+        age: 18,
+        gender: "",
+        bio: "",
+        password: "",
+        passwordConfirm: "",
         looking_for: "1111", //default to looking for everything
-        zip_code: "33332"
+        zip_code: ""
     }
 
     handleSubmit = async (e) => {
@@ -35,6 +35,8 @@ class SignUpForm extends Component {
         // formData.append("username", "Groucho");
         formData.append('email', this.state.email)
         formData.append('display_name', this.state.display_name)
+        formData.append('gender', this.state.gender)
+        formData.append('bio', this.state.bio)
         formData.append('age', this.state.age)
         formData.append('password', this.state.password)
         // formData.append('passwordConfirm', this.state.passwordConfirm)

@@ -2,21 +2,30 @@ import React, { Component } from "react";
 import RelationshipItem from "./RelationshipItem";
 import { connect } from "react-redux";
 import { Menu } from "semantic-ui-react";
+import { fetchCurrentUser } from '../store/actions/users'
 
-const RelationshipList = props => {
+class RelationshipList extends Component {
+
+
+  componentDidMount() {
+    this.props.getCurrentUser()
+  }
+
+
+  render() {
   let relationshipsItems;
 
-  if (props.relationships) {
-    relationshipsItems = props.relationships.map(relationship => {
+  if (this.props.relationships) {
+    relationshipsItems = this.props.relationships.map(relationship => {
       return (
         <Menu.Item
           key={relationship.relationship_id}
-          active={props.activeRelationship === relationship}
+          active={this.props.activeRelationship === relationship}
         >
           <RelationshipItem
-            user={props.user}
+            user={this.props.user}
             relationship={relationship}
-            selectRelationship={props.selectRelationship}
+            selectRelationship={this.props.selectRelationship}
           />
         </Menu.Item>
       );
@@ -28,13 +37,22 @@ const RelationshipList = props => {
       {relationshipsItems || "No relationships found"}
     </Menu>
   );
-};
+}
+
+}
 
 const mapStateToProps = state => {
+  if (state.User.relationships) {
+  const relationships = state.User.relationships.filter(rel=> !rel.pending)
   return {
-    relationships: state.User.relationships,
+    relationships,
     user: state.User.current_user
-  };
+  } }
+  return {};
 };
 
-export default connect(mapStateToProps)(RelationshipList);
+const mapDispatchToProps = dispatch => {
+  return { getCurrentUser: () => dispatch(fetchCurrentUser()) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RelationshipList);

@@ -41,8 +41,9 @@ class ExplorePage extends Component {
 }
 
 const mapStateToProps = state => {
+  const users = state.User.all.filter(user=> user.id != state.User.current_user.id)
   return {
-    userData: state.User.all
+    userData: users
   };
 };
 
