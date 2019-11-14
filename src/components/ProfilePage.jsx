@@ -29,7 +29,8 @@ class ProfilePage extends Component {
 
   render() {
     if (!!this.props.user) {
-      const { display_name, age, gender, bio } = this.props.user;
+      const { display_name, age, gender, bio, img_url } = this.props.user;
+      console.log('looooke heree', this.props.user)
       return (
         <div className="ui item">
           <Container text>
@@ -37,7 +38,7 @@ class ProfilePage extends Component {
 
             <Image
               align="right"
-              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              src={img_url}
               size="medium"
               circular
             />
